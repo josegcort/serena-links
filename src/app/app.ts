@@ -8,6 +8,7 @@ export interface SocialLink {
   value: string;       // URL de redirección
   icon: string;         // nombre de archivo local o URL de imagen
   isIconFile: boolean;  // true = archivo local en assets/icons, false = URL externa
+  isVisible: boolean;      // controla si el link se muestra en la UI
 }
 
 @Component({

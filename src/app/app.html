@@ -1,14 +1,13 @@
 <main class="page">
-
   <!-- Fondo 9:16 adaptativo -->
   <div class="page__bg" aria-hidden="true">
-    <img src="images/background.jpg" alt="">
+    <img src="images/background.jpg" alt="" />
   </div>
 
   <!-- Marca / Logo -->
   <section class="brand">
     <div class="brand__halo">
-      <img class="brand__logo" src="images/logo.png" alt="Logo">
+      <img class="brand__logo" src="images/logo.png" alt="Logo" />
     </div>
 
     <!-- Opcional: descomenta y rellena si quieres nombre y subtítulo -->
@@ -31,51 +30,53 @@
 
   <!-- Links -->
   <nav class="links" aria-label="Redes sociales">
-    <a
-      *ngFor="let link of links$ | async; let i = index; trackBy: trackByName"
-      class="link-card"
-      [style.--i]="i"
-      [href]="link.value"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <!-- Icono -->
-      <span class="link-card__icon">
-        <!-- Icono local: filtro oro (SVG/PNG monocromo sobre fondo oscuro) -->
-        <img
-          *ngIf="getIconSrc(link) && !hasIconError(link.name) && link.isIconFile"
-          class="icon--local"
-          [src]="getIconSrc(link)"
-          [alt]="link.name"
-          loading="lazy"
-          (error)="onIconError(link.name)"
-        >
-        <!-- Icono externo: se muestra a color -->
-        <img
-          *ngIf="getIconSrc(link) && !hasIconError(link.name) && !link.isIconFile"
-          class="icon--external"
-          [src]="getIconSrc(link)"
-          [alt]="link.name"
-          loading="lazy"
-          (error)="onIconError(link.name)"
-        >
-        <!-- Fallback: primera letra -->
-        <span
-          class="link-card__fallback"
-          *ngIf="!getIconSrc(link) || hasIconError(link.name)"
-          aria-hidden="true"
-        >{{ link.name.charAt(0) }}</span>
-      </span>
+    <ng-container *ngFor="let link of links$ | async; let i = index; trackBy: trackByName">
+      <a
+        *ngIf="link.isVisible"
+        class="link-card"
+        [style.--i]="i"
+        [href]="link.value"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <!-- Icono -->
+        <span class="link-card__icon">
+          <!-- Icono local: filtro oro (SVG/PNG monocromo sobre fondo oscuro) -->
+          <img
+            *ngIf="getIconSrc(link) && !hasIconError(link.name) && link.isIconFile"
+            class="icon--local"
+            [src]="getIconSrc(link)"
+            [alt]="link.name"
+            loading="lazy"
+            (error)="onIconError(link.name)"
+          />
+          <!-- Icono externo: se muestra a color -->
+          <img
+            *ngIf="getIconSrc(link) && !hasIconError(link.name) && !link.isIconFile"
+            class="icon--external"
+            [src]="getIconSrc(link)"
+            [alt]="link.name"
+            loading="lazy"
+            (error)="onIconError(link.name)"
+          />
+          <!-- Fallback: primera letra -->
+          <span
+            class="link-card__fallback"
+            *ngIf="!getIconSrc(link) || hasIconError(link.name)"
+            aria-hidden="true"
+            >{{ link.name.charAt(0) }}</span
+          >
+        </span>
 
-      <span class="link-card__name">{{ link.name }}</span>
+        <span class="link-card__name">{{ link.name }}</span>
 
-      <!-- Flecha inline SVG (sin dependencias) -->
-      <span class="link-card__arrow" aria-hidden="true">
-        <svg viewBox="0 0 16 16">
-          <polyline points="5 3 11 8 5 13"/>
-        </svg>
-      </span>
-    </a>
+        <!-- Flecha inline SVG (sin dependencias) -->
+        <span class="link-card__arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 16">
+            <polyline points="5 3 11 8 5 13" />
+          </svg>
+        </span>
+      </a>
+    </ng-container>
   </nav>
-
 </main>
