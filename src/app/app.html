@@ -1,13 +1,22 @@
 <main class="page">
   <!-- Fondo 9:16 adaptativo -->
   <div class="page__bg" aria-hidden="true">
-    <img src="images/background.jpg" alt="" />
+    <img
+        class="page__bg__img"
+        appLazyImg="images/background.jpg"
+        placeholder="images/tiny-background.jpg"
+        alt="" />
   </div>
 
   <!-- Marca / Logo -->
   <section class="brand">
     <div class="brand__halo">
-      <img class="brand__logo" src="images/logo.png" alt="Logo" />
+      <img
+        class="brand__logo"
+        appLazyImg="images/logo.png"
+        placeholder="images/tiny-logo.png"
+        alt="Logo"
+      />
     </div>
 
     <!-- Opcional: descomenta y rellena si quieres nombre y subtítulo -->
@@ -41,20 +50,11 @@
       >
         <!-- Icono -->
         <span class="link-card__icon">
-          <!-- Icono local: filtro oro (SVG/PNG monocromo sobre fondo oscuro) -->
           <img
-            *ngIf="getIconSrc(link) && !hasIconError(link.name) && link.isIconFile"
-            class="icon--local"
-            [src]="getIconSrc(link)"
-            [alt]="link.name"
-            loading="lazy"
-            (error)="onIconError(link.name)"
-          />
-          <!-- Icono externo: se muestra a color -->
-          <img
-            *ngIf="getIconSrc(link) && !hasIconError(link.name) && !link.isIconFile"
+            *ngIf="getIconSrc(link, false) && !hasIconError(link.name)"
             class="icon--external"
-            [src]="getIconSrc(link)"
+            [appLazyImg]="getIconSrc(link, true)"
+            [placeholder]="getIconSrc(link, false)"
             [alt]="link.name"
             loading="lazy"
             (error)="onIconError(link.name)"
@@ -62,7 +62,7 @@
           <!-- Fallback: primera letra -->
           <span
             class="link-card__fallback"
-            *ngIf="!getIconSrc(link) || hasIconError(link.name)"
+            *ngIf="!getIconSrc(link, false) || hasIconError(link.name)"
             aria-hidden="true"
             >{{ link.name.charAt(0) }}</span
           >

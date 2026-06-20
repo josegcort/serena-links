@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { LinksService } from './core/services/links';
+import { LazyImgDirective } from './core/directives/lazy-img.directive';
 
 export interface SocialLink {
   name: string;
@@ -14,7 +15,7 @@ export interface SocialLink {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LazyImgDirective],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -32,9 +33,9 @@ export class App {
   }
 
   /** Devuelve la ruta final del ícono, sea archivo local o URL externa */
-  getIconSrc(link: SocialLink): string {
+  getIconSrc(link: SocialLink, isLazy: boolean): string {
     if (!link?.icon) return '';
-    return link.isIconFile ? `${this.localIconsPath}${link.icon}` : link.icon;
+    return link.isIconFile ? `${this.localIconsPath}${isLazy ? '' : 'tiny-'}${link.icon}` : link.icon;
   }
 
   hasIconError(name: string): boolean {

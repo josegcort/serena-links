@@ -85,8 +85,8 @@
 /* Halo dorado detrás del logo — el elemento firma */
 .brand__halo {
     position: relative;
-    width: clamp(88px, 24vw, 120px);
-    height: clamp(88px, 24vw, 120px);
+    width: clamp(100px, 40vw, 150px);
+    height: clamp(100px, 40vw, 150px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -394,14 +394,14 @@
     }
 
     .brand__halo {
-        width: 70px;
-        height: 70px;
+        width: 100px;
+        height: 100px;
     }
 }
 
 @media (max-width: 600px) {
   .page {
-    min-height: 100dvh;
+    min-height: 90dvh;
     padding-top: 8.5rem;  
   }
 }
