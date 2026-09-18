@@ -1,0 +1,12 @@
+<div class="image-modal"  *ngIf="visible()" (click)="close()">
+  <img
+    [src]="imageSrc"
+    alt="Imagen ampliada"
+    class="modal-image"
+    (click)="$event.stopPropagation()"
+  />
+
+  <button class="close-button" (click)="close()">
+    ×
+  </button>
+</div>

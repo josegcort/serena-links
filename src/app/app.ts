@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { LinksService } from './core/services/links';
 import { LazyImgDirective } from './core/directives/lazy-img.directive';
+import { ModalComponent } from './components/modal/modal.component';
 
 export interface SocialLink {
   name: string;
@@ -10,16 +11,18 @@ export interface SocialLink {
   icon: string;         // nombre de archivo local o URL de imagen
   isIconFile: boolean;  // true = archivo local en assets/icons, false = URL externa
   isVisible: boolean;      // controla si el link se muestra en la UI
+  isModal: boolean;      // controla si mostrar en un modal o un link de redireccion
 }
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, LazyImgDirective],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
+  standalone: true,
+  imports: [CommonModule, LazyImgDirective, ModalComponent],
 })
 export class App {
+
   links$: Observable<SocialLink[]>;
 
   /** Carpeta donde se buscan los íconos locales cuando isIconFile = true */
@@ -48,5 +51,9 @@ export class App {
 
   trackByName(_index: number, link: SocialLink): string {
     return link.name;
+  }
+
+  openModal(image: string): void {
+    console.log('Abrir modal con imagen:', image);
   }
 }

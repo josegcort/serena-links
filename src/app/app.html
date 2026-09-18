@@ -41,7 +41,7 @@
   <nav class="links" aria-label="Redes sociales">
     <ng-container *ngFor="let link of links$ | async; let i = index; trackBy: trackByName">
       <a
-        *ngIf="link.isVisible"
+        *ngIf="link.isVisible && !link.isModal"
         class="link-card"
         [style.--i]="i"
         [href]="link.value"
@@ -77,6 +77,43 @@
           </svg>
         </span>
       </a>
+      <a
+        *ngIf="link.isVisible && link.isModal"
+        class="link-card"
+        [style.--i]="i"
+        href="#"
+        (click)="modal.open(link.value)">
+        <!-- Icono -->
+        <span class="link-card__icon">
+          <img
+            *ngIf="getIconSrc(link, false) && !hasIconError(link.name)"
+            class="icon--external"
+            [appLazyImg]="getIconSrc(link, true)"
+            [placeholder]="getIconSrc(link, false)"
+            [alt]="link.name"
+            loading="lazy"
+            (error)="onIconError(link.name)"
+          />
+          <!-- Fallback: primera letra -->
+          <span
+            class="link-card__fallback"
+            *ngIf="!getIconSrc(link, false) || hasIconError(link.name)"
+            aria-hidden="true"
+            >{{ link.name.charAt(0) }}</span
+          >
+        </span>
+
+        <span class="link-card__name">{{ link.name }}</span>
+
+        <!-- Flecha inline SVG (sin dependencias) -->
+        <span class="link-card__arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 16">
+            <polyline points="5 3 11 8 5 13" />
+          </svg>
+        </span>
+      </a>
     </ng-container>
   </nav>
+<app-modal #modal></app-modal>
 </main>
+
