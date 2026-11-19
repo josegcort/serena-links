@@ -7,8 +7,9 @@ import { ModalComponent } from './components/modal/modal.component';
 
 export interface SocialLink {
   name: string;
-  value: string;       // URL de redirección
-  icon: string;         // nombre de archivo local o URL de imagen
+  value: string;       // URL de redirección o información
+  img: string;       //  nombre de archivo local para imagen
+  icon: string;         // nombre de archivo local o URL de imagen para icono
   isIconFile: boolean;  // true = archivo local en assets/icons, false = URL externa
   isVisible: boolean;      // controla si el link se muestra en la UI
   isModal: boolean;      // controla si mostrar en un modal o un link de redireccion

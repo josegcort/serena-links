@@ -17,11 +17,8 @@ export class ModalComponent {
   copiedStatus = signal('\u00A0');
 
   open(link: SocialLink): void {
-    this.imageSrc = 'images/' + link.icon;
+    this.imageSrc = 'images/' + link.img;
     this.value = link.value;
-
-    // this.imageSrc = 'images/' + link.value;
-    // this.value = "3108998828";
 
     this.visible.set(true);
   }
